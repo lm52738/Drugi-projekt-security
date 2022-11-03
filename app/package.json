@@ -33,8 +33,7 @@
   "scripts": {
     "build": "npm run clean; tsc;",
     "clean": "rm -rf dist",
-    "start": "npm run server; cd ../client; npm start",
-    "server": "node dist/app.js"
+    "start": "node dist/app.js"
   },
   "author": "",
   "license": "ISC"

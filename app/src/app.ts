@@ -6,9 +6,20 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { indexRouter } from './routes/index';
 import { dataRouter } from './routes/data';
+import session from 'express-session';
+import crypto from 'crypto';
+import uuid from 'node-uuid';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 dotenv.config()
 
-const app = express();
+const app = express().disable("x-powered-by");
+
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 
@@ -32,12 +43,8 @@ if (externalUrl) {
   })
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname));
-
 // database on Render
-const pool = new Pool({
+export const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: 'hnlwomen_40ha',
@@ -45,6 +52,25 @@ const pool = new Pool({
   port: 5432,
   ssl : true
 })
+
+declare module "express-session" {
+  interface SessionData {
+    user: string;
+  }
+}
+
+
+app.use(session({
+  secret: "${process.env.SESSION_SECRET}",
+  genid: function() {
+    return crypto.createHash('sha256').update(uuid.v1()).update(crypto.randomBytes(256)).digest("hex");;
+  },
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge:  1000 * 60 * 60 * 24 },
+}));
+
+
 
 app.use('/', indexRouter);
 app.use('/data', dataRouter);

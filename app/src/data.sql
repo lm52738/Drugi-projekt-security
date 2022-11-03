@@ -14,7 +14,6 @@ CREATE TABLE appUser
   username VARCHAR(100)  NOT NULL,
   password VARCHAR(200)  NOT NULL,
   passwordHash VARCHAR(200)  NOT NULL,
-  salt VARCHAR(50),
   PRIMARY KEY (idUser),
   UNIQUE (email)
 );
@@ -31,21 +30,22 @@ CREATE TABLE book
   PRIMARY KEY (idBook)
 );
 
-INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash,salt) 
+-- lozinke iz riječnika, riječnik za korisnika (admin), jedna lozinka za više korisnika
+INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash) 
 VALUES ('mn92833@mailinator.com','Mark','Nieves','mn92833','password123',
-'01343e5d1d0a4cf30c5910651f77507587dc2acd8e386a18641e7b0cff8c3deb','*C?2zDQ+TLa6');
-INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash,salt) 
+'$2b$10$JMs.oLAdhKdJDeXOohoXSeV8qy2568Mq2Mg4BuiCOk9EX.EApiV7G');
+INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash) 
 VALUES ('hs65524@mailinator.com','Hannah','Sherman','hs65524','password123',
-'dc2e8e76d9acfaa1b51cff82eacf8bd8081d58d3de279f5ac87b2f9356b3ff91','xbG-LWluPzTA');
-INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash,salt) 
-VALUES ('br72839@mailinator.com','Bob','Rhodes','br72839','qwert123',
-'5c24ee6c5d1ae2f291895d4abd16ad55eb31a89a0942ac72bc0e5d4a493e50b2','/C8cF#r/x:N.');
-INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash,salt) 
-VALUES ('ks64839@mailinator.com','Korina','Swain','ks64839','qwert123',
-'06204610f5bc347f30b32d092fddbaae3956628edc6bb420b6f1eae13f6f881c','qsR=N1bxq8HO');
-INSERT INTO appUser (email,username,password,passwordHash,salt) 
-VALUES ('admin@mailinator.com','admin','qwert123',
-'a05f1fbf1a20b0f0d54d687458386e4ee373e0b2eb556dc046f64d5b07e3e1a8','N4W+*.r5PQ7:');
+'$2b$10$Yg4DzOFGx0FhyyXstZmP9eLApoh6EcwlQXqeOTI5X5sd0GNK3vkzy');
+INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash) 
+VALUES ('br72839@mailinator.com','Bob','Rhodes','br72839','overcoat-beckon-debtor-muddle',
+'$2b$10$Us7TrgmkaTDcoWl2sF1EA.v4EjTjSRORF8jpQMJzlz3Z5FXuXVF.W');
+INSERT INTO appUser (email,firstname,lastname,username,password,passwordHash) 
+VALUES ('ks64839@mailinator.com','Korina','Swain','ks64839','iran-amortize-shortage-parlour',
+'$2b$10$KSmNxwNGV3HUTWhi4xvcveM3WB2437aR6munBs5okYrTBDx6C1LVi');
+INSERT INTO appUser (email,username,password,passwordHash) 
+VALUES ('admin@mailinator.com','admin','admin123',
+'$2b$10$bAublTl2LsAUf4BsyZdxvuI4V6..geS7LBgFKKlCjeC5wwWLooOsm');
 
 INSERT INTO book (nameBook,author,nbrPages,nativeLang,genre) 
 VALUES ('To Kill a Mockingbird','Harper Lee',364,'English','Thriller');

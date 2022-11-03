@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static(path.join("..","client", "build")));
 app.use(express.static("public"));
 
 

@@ -30,9 +30,9 @@ export const Data = () => {
 
     const navigate = useNavigate();
 
-    const externalUrl = process.env.RENDER_EXTERNAL_URL;
-    const port = externalUrl && process.env.PORT ? parseInt(process.env.PORT) : 4080;
-    const host = externalUrl !== undefined ? `http://127.0.0.1:${port}/data/` : `https://localhost:${port}/data/`;
+    const externalUrl = "https://fer-security-app.onrender.com";
+    const port = 4080;
+    const host = externalUrl !== undefined ? `${externalUrl}/data/` : `https://localhost:${port}/data/`;
 
     const [authError, setAuthError] = useState<string | null>(null);
     const [value, setValue] = useState('')

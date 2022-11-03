@@ -21,8 +21,8 @@ import 'react-block-ui/style.css';
 const Authentification = () => {
     const navigate = useNavigate();
 
-    const externalUrl = process.env.RENDER_EXTERNAL_URL;
-    const port = externalUrl && process.env.PORT ? parseInt(process.env.PORT) : 4080;
+    const externalUrl = "https://fer-security-app.onrender.com";
+    const port = 4080;
     const host = externalUrl !== undefined ? `${externalUrl}/` : `https://localhost:${port}/`;
     
     

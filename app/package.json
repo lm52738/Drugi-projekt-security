@@ -28,7 +28,7 @@
     "@types/pg": "^8.6.5"
   },
   "scripts": {
-    "build": "npm run clean; tsc; npm run copy-views; npm run copy-views",
+    "build": "npm run clean; tsc;",
     "clean": "rm -rf dist",
     "start": "concurrently \"npm run server\" \"cd ../client; npm start\"",
     "server": "node dist/app.js"
